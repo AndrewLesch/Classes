@@ -1,5 +1,4 @@
 class Person {
-
     constructor(name, secondName, dateOfBirth, passportId) {
         this.name = name;
         this.secondName = secondName;
@@ -13,7 +12,6 @@ class Person {
 }
 
 class Student extends Person {
-
     constructor(name, secondName, dateOfBirth, passportId, faculty, groupNubmer, typeOfTraining) {
         super(name, secondName, dateOfBirth, passportId)
         this.faculty = faculty;
@@ -30,7 +28,6 @@ class Student extends Person {
 }
 
 class Teacher extends Person {
-
     constructor(name, secondName, dateOfBirth, passportId, nameOfSubject, nameOfCathedra,) {
         super(name, secondName, dateOfBirth, passportId)
         this.nameOfSubject = nameOfSubject;
@@ -44,7 +41,6 @@ class Teacher extends Person {
 }
 
 class Cathedra {
-
     constructor(nameOfCathedra, headOfCathedra) {
         this.nameOfCathedra = nameOfCathedra;
         this.headOfCathedra = headOfCathedra;
@@ -56,7 +52,6 @@ class Cathedra {
 }
 
 class Subject {
-
     constructor(nameOfSubject, listOfStudent) {
         this.nameOfSubject = nameOfSubject;
         this.listOfStudent = listOfStudent;

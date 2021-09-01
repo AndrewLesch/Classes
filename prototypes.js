@@ -42,6 +42,7 @@ Cathedra.prototype.displaySummary = function () {
         console.log(this.nameOfCathedra, this.headOfCathedra);
 }
 
+
 function Subject(nameOfSubject, listOfStudent) {
     this.nameOfSubject = nameOfSubject;
     this.listOfStudent = listOfStudent;

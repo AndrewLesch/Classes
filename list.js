@@ -51,38 +51,30 @@ class DoublyLinkedList {
   }
 }
 
+
 const list = new DoublyLinkedList();
 list.append({name: 'Oleg', facalty : 'fre',});
 list.append({name: 'Evg', facalty : 'ksis',});
 list.append({name: 'Kostya', facalty : 'ief',})
 
-
-// Делаем лист массивом и через фор оф можно уже
-/*
-let listArray = list.toArray();
-for (const element of listArray) {
-  console.log(element);
-}
-console.log(list);
-*/
-
-// А тут попытаемся лист через итерал
-console.log(list);
 list[Symbol.iterator] = function () {
-  let end = list.tail;
-  let currentNode = list.head;
+  let currentNode = this.head;
   return {
-    next: function () {
-      if (end !== list.tail) {
-        currentNode = list.head.next;
+    next: function() {
+      const value = currentNode;
+
+      if (value) {
+        currentNode = value.next;
       }
-      
-      return {
-        value: currentNode, done: end === list.tail
-      };
+      return {value, done : !value}
+    },
+    [Symbol.iterator]: function() {
+      return this;
     }
   }
 }
-for (let value of list) {
+
+let iteratedList = list[Symbol.iterator]();
+for (let value of iteratedList) {
   console.log(value);
  }
