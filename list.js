@@ -1,4 +1,4 @@
-class DoublyLinkedListNode {
+class DoubleLinkedListNode {
   constructor(value, next = null, previous = null) {
     this.value = value;
     this.next = next;
@@ -6,16 +6,32 @@ class DoublyLinkedListNode {
   }
 }
 
-class DoublyLinkedList {
+class DoubleLinkedList {
   constructor() {
     this.head = null;
     this.tail = null;
   }
+
+  [Symbol.iterator] = function () {
+    let currentNode = this.head;
+    return {
+      next: function() {
+        const value = currentNode;
   
+        if (value) {
+          currentNode = value.next;
+        }
+        return {value, done : !value}
+      },
+      [Symbol.iterator]: function() {
+        return this;
+      }
+    }
+  }
   // Append метод принимает значение в качестве аргумента и создаёт новый узел с этим значением, помещая его в конец связного списка.
   append(value) {
     // Создаём новый узел.
-    const newNode = new DoublyLinkedListNode(value);
+    const newNode = new DoubleLinkedListNode(value);
   
     if (this.tail) {
       // Присоединяем новый узел к концу связного списка.
@@ -38,43 +54,19 @@ class DoublyLinkedList {
   toArray() {
     const nodes = [];
   
-    let currentNode = this.head;
-  
-    // Перебираем все узлы и добавляем в массив.
-    while (currentNode) {
-      nodes.push(currentNode);
-      currentNode = currentNode.next;
+    for (const i of this) {
+      nodes.push(i);
     }
-  
-    // Возвращаем массив из всех узлов.
+
     return nodes;
   }
 }
 
-
-const list = new DoublyLinkedList();
+const list = new DoubleLinkedList();
 list.append({name: 'Oleg', facalty : 'fre',});
 list.append({name: 'Evg', facalty : 'ksis',});
 list.append({name: 'Kostya', facalty : 'ief',})
 
-list[Symbol.iterator] = function () {
-  let currentNode = this.head;
-  return {
-    next: function() {
-      const value = currentNode;
-
-      if (value) {
-        currentNode = value.next;
-      }
-      return {value, done : !value}
-    },
-    [Symbol.iterator]: function() {
-      return this;
-    }
-  }
-}
-
-let iteratedList = list[Symbol.iterator]();
-for (let value of iteratedList) {
+for (let value of list) {
   console.log(value);
- }
+}
